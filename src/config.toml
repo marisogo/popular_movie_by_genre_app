@@ -1,0 +1,27 @@
+[TAIPY]
+
+[DATA_NODE.initial_dataset]
+storage_type = "csv"
+scope = "GLOBAL:SCOPE"
+path = "data.csv"
+
+[DATA_NODE.selected_value_node]
+scope = "GLOBAL:SCOPE"
+default_data = "ACTION"
+
+[DATA_NODE.filtered_data]
+scope = "GLOBAL:SCOPE"
+
+[TASK.filter]
+inputs = [ "initial_dataset:SECTION", "selected_value_node:SECTION",]
+function = "__main__.filter_genre:function"
+outputs = [ "filtered_data:SECTION",]
+skippable = "True:bool"
+
+[PIPELINE.pipeline]
+tasks = [ "filter:SECTION",]
+
+[SCENARIO.scenario]
+pipelines = [ "pipeline:SECTION",]
+
+[SCENARIO.scenario.comparators]
